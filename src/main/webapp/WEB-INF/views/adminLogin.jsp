@@ -17,6 +17,12 @@
     <script type="text/javascript" src="resourse/js/login.js"></script>
     <link href="<%=basePath%>resourse/css/login2.css" rel="stylesheet" type="text/css" />
 
+    <style type="text/css">
+        #login_text{
+            text-align: center;
+            font-size: 20px;
+        }
+    </style>
     <script type="text/javascript">
         /*id为空时清除下方提示栏*/
         function check_val() {
@@ -113,15 +119,7 @@
 
 <div class="login" style="margin-top: 50px;">
     <div class="header">
-        <div class="switch" id="switch">
-            <a class="switch_btn_focus" id="switch_qlogin"
-               href="javascript:void(0);" tabindex="7">快速登录</a>
-
-            <a	class="switch_btn" id="switch_login" href="javascript:void(0);"
-                  tabindex="8">快速注册</a>
-            <div class="switch_bottom" id="switch_bottom"
-                 style="position: absolute; width: 64px; left: 0px;"></div>
-        </div>
+        <p id="login_text">快速登录</p>
     </div>
     <div class="web_qr_login" id="web_qr_login"
          style="display: block; height: 235px;">
