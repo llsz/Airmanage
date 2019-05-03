@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="cn.lsz.dao.AirDao">
+    <resultMap type="cn.lsz.model.Air" id="airMap">
+        <result column="time" property="time"/>
+        <result column="aqi" property="aqi"/>
+        <result column="level" property="level"/>
+        <result column="pm2_5" property="pm2_5"/>
+        <result column="pm10" property="pm10"/>
+        <result column="so2" property="so2"/>
+        <result column="co" property="co"/>
+        <result column="no2" property="no2"/>
+        <result column="o3" property="o3"/>
+        <result column="cityid" property="cityid"/>
+    </resultMap>
+
+
+    <select id="selectAir" resultMap="airMap" resultType="cn.lsz.model.Air">
+        SELECT * FROM air WHERE to_days(now()) - to_days(time) <![CDATA[<=]]> 1
+    </select>
+
+    <select id="selectTheAir" resultMap="airMap" resultType="cn.lsz.model.Air">
+        SELECT * FROM air WHERE time <![CDATA[=]]> #{time} AND cityid = #{cityid}
+    </select>
+    <select id="selectAirByDate" resultMap="airMap" resultType="cn.lsz.model.Air">
+        SELECT * FROM air WHERE cityid = #{cityid}
+        <if test="timestart != null">
+            AND time <![CDATA[>=]]> #{timestart}
+        </if>
+        <if test="timeend != null">
+            AND time <![CDATA[<=]]> #{timeend}
+        </if>
+        ORDER BY time ASC
+    </select>
+
+    <insert id="addAir" parameterType="cn.lsz.model.Air">
+        INSERT INTO
+        air(time,aqi,level,pm2_5,pm10,so2,co,no2,o3,cityid)
+        VALUES (#{time},#{aqi},#{level},#{pm2_5},
+        #{pm10},#{so2},#{co},#{no2},#{o3},#{cityid})
+    </insert>
+
+    <update id="updateAir" parameterType="cn.lsz.model.Air">
+        UPDATE air SET time = #{time},aqi = #{aqi},level = #{level},
+            pm2_5 = #{pm2_5},pm10 = #{pm10},so2 = #{so2},co = #{co},
+            no2 = #{no2},o3 = #{o3},cityid = #{cityid}
+            WHERE time = #{time} AND cityid = #{cityid}
+    </update>
+
+    <delete id="delAir" parameterType="cn.lsz.model.Air">
+        DELETE FROM air WHERE cityid = #{cityid}
+            AND time <![CDATA[>=]]> #{timestart}
+            AND time <![CDATA[<=]]> #{timeend}
+    </delete>
+
+    <!--查询总记录数-->
+    <select id="selectCount" resultType="int">
+        SELECT count(*) FROM air WHERE 1=1
+        <if test="cityid != 0">
+            AND cityid = #{cityid}
+        </if>
+        <if test="timestart != null">
+            AND time <![CDATA[>=]]> #{timestart}
+        </if>
+        <if test="timeend != null">
+            AND time <![CDATA[<=]]> #{timeend}
+        </if>
+    </select>
+
+    <!--分页查询-->
+    <select id="findByPage" parameterType="Map" resultMap="airMap">
+        SELECT * FROM air WHERE 1=1
+        <if test="cityid != 0">
+            AND cityid = #{cityid}
+        </if>
+
+        <if test="timestart != null">
+            AND time <![CDATA[>=]]> #{timestart}
+        </if>
+        <if test="timeend != null">
+            AND time <![CDATA[<=]]> #{timeend}
+        </if>
+        ORDER BY time ASC
+        <if test="start != null and size != null">
+            limit #{start},#{size}
+        </if>
+    </select>
+
+    <!--日期查询-->
+    <select id="findCondition" parameterType="Map" resultMap="airMap">
+        SELECT * FROM air WHERE 1=1
+        <if test="timestart != null">
+            AND time <![CDATA[>=]]> #{timestart}
+        </if>
+        <if test="timeend != null">
+            AND time <![CDATA[<=]]> #{timeend}
+        </if>
+        ORDER BY time ASC
+        <if test="start != null and size != null">
+            limit #{start},#{size}
+        </if>
+    </select>
+
+</mapper>

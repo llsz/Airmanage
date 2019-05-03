@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="cn.lsz.dao.CityDao">
+    <resultMap type="cn.lsz.model.City" id="cityMap">
+        <result column="cityid" property="cityid"/>
+        <result column="cityname" property="cityname"/>
+    </resultMap>
+
+
+
+    <select id="selectCityById" resultType="cn.lsz.model.City" resultMap="cityMap">
+        SELECT * FROM city WHERE cityid = #{cityid}
+    </select>
+
+    <select id="selectCityByName" resultMap="cityMap" resultType="cn.lsz.model.City">
+        SELECT * FROM city WHERE cityname = #{cityname}
+    </select>
+
+</mapper>
