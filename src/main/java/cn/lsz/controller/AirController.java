@@ -37,8 +37,7 @@ public class AirController {
      * 初始登陆页面展示
      * */
     @RequestMapping("/show")
-
-    public String showAir(Model model, HttpServletRequest request,String cityid){
+    public String showAir(Model model,String cityid){
         /*展示昨天大气数据*/
         List<Air> airs = airService.selectAir();
         List<Air> today = new ArrayList<Air>();

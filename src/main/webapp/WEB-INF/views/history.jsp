@@ -246,7 +246,7 @@
                 <li ><a href="/show?cityid=1">空气质量</a> </li>
                 <li class="dropdown active">
                     <a href="/showhistory?cityid=1" class="dropdown-toggle" data-toggle="dropdown">
-                        历史天气
+                        历史空气
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="/showhistory?cityid=1">福州</a> </li>

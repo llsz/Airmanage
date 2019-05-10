@@ -133,15 +133,15 @@
             <!--左侧导航栏 -->
             <div class="col-md-3">
                 <div class="list-group">
-                    <a href="/showAir" class="list-group-item text-center active">数据管理</a>
-                    <a href="/addview" class="list-group-item text-center">数据添加</a>
+                    <a href="/showAir" class="list-group-item text-center">数据管理</a>
+                    <a href="/addview" class="list-group-item text-center active">数据添加</a>
                 </div>
             </div>
 
             <!-- 右侧内容 -->
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">数据修改</div>
+                    <div class="panel-heading">数据添加</div>
                     <div class="panel-body">
                         <form id="myForm" method="post" class="form-horizontal" role="form">
                             <div class="form-group">
